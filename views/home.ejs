@@ -44,11 +44,16 @@
                                 <%= row.name %>
                             </p>
                         </div>
-                        <button data-id="<%= row._id  %>"
-                            class="p-5 bg-red-500 text-white font-bold hover:bg-green-500 duration-100 transition-all" onclick="sendMovieData(this)">Delete</button>
-                        <p id="movie-link" class="hidden">
-                            <%= row.Mlink %>
-                        </p>
+                        <div class="flex gap-1 justify-between">
+
+                            <button data-id="<%= row._id  %>"
+                                class="p-5 bg-red-500 text-white font-bold hover:bg-green-500 duration-100 transition-all" onclick="sendMovieData(this)">Delete</button>
+                            <p id="movie-link" class="hidden">
+                                <%= row.Mlink %>
+                            </p>
+                            <a   data-id="<%= row._id  %>"
+                                class="p-5 bg-blue-500 text-white font-bold hover:bg-green-500 duration-100 transition-all" onclick="movieupdate(this)"  >update</a>
+                        </div>
                     </div>
                     <% }); %>
             </div>
@@ -127,11 +132,29 @@
            body: JSON.stringify({ id: movieId })
          })
          .then(response => response.text())
-         .then(data =>{ console.log(data)
-              window.location.reload(); });
+         .then(data =>{ console.log(data) });
        }
      }   
+     function movieupdate(element) {
+        var choice=confirm("Are you sure to update the element ")
+     if(choice==true){
 
+         const Id = element.getAttribute('data-id'); // Extract from data- attribute
+//          fetch(`/update?id=${Id}`, {
+//          method: 'GET'
+// })
+// .then(response => response.json())
+// .then(data => {console.log(data)
+// })
+// .catch(error => console.error('Error:', error));
+/*
+FETCH IS NOT WORK IN GET METHOD BEACASE IT CAN ONLY SEND JSON FILE LIKE TEXT 
+BUT IT CAN'T ABLE TO RENDER WHOLE PAGE BUT IT WORK IN POST METHOD BEACAUSE IT ONLY SENDS THE DATA NOT LOAD A PAGE
+*/
+window.location.href= `/update?id=${Id}`
+
+     }   
+    }
 </script>
 
 </html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>update page</title>
+    <link rel="stylesheet" href="./tailwind.css">
+</head>
+<body>
+    <form action="/update" method="post">
+        <section class="p-5 bg-purple-50">
+            <p class="text-3xl p-5">please enter the movie details to update up</p>
+
+            <% dataup.forEach((row, index) => { %>
+                <div class="<%= index %>">
+                    <div class="flex p-3 hidden"  >
+                        <p class="my-auto">objectid</p>
+                        <input name="id" type="text" readonly  required class="bg-green-500 ml-1 text-green-500" value="<%= row._id %>">
+                    </div>
+                    <div class="flex p-3">
+                        
+                        <p class="my-auto">Movie name:</p>
+                        <textarea name="name" type="text"  required class="bg-green-500 ml-1"><%= row.name %></textarea>
+                    </div>
+                    
+                    <div class="flex p-3">
+                        <p class="my-auto">Image Link: </p>
+                        <textarea name="link" type="text" required class="bg-green-500 ml-3"><%= row.link %></textarea>
+                    </div>
+            
+                    <div class="flex p-3">
+                        <p class="my-auto">Movie Link: </p>
+                        <textarea name="Mlink" type="text" required class="bg-green-500 ml-3"><%= row.Mlink %></textarea>
+                    </div>
+            
+                    <button type="submit"
+                        class="mt-10 p-5 bg-red-500 text-white font-bold hover:bg-green-500 duration-100 transition-all rounded">
+                        Update
+                    </button>
+                </div>
+            <% }) %>
+            
+
+        </section>
+    </form>
+</body>
+<style>
+    textarea{
+        resize: both;
+        
+        
+    }
+</style>
+</html>

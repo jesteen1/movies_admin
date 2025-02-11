@@ -57,10 +57,50 @@ app.post('/',async(req,res)=>{
 app.post('/Delete',async(req,res)=>{
 const data_del=req.body.id
 var Deleted_data=await collection.findByIdAndDelete(data_del)
-console.log(Deleted_data)
-res.redirect('/del')
+//console.log(Deleted_data)
+
 })
-app.get('/del',(req,res)=>{
-res.send("data deleted")
-res.redirect('/')
+
+app.get('/update',async(req,res)=>{
+   if (req.path === "/favicon.ico") return res.status(204).end();
+   const id_data=req.query.id
+   console.log("id",id_data)
+  const  singleset= await collection.findOne({ _id: req.query.id });
+  console.log('database',singleset)
+
+
+  var singledata = [
+   singleset
+   ];
+res.render("update.ejs",{dataup:singledata})
+
 })
+app.post('/update',async(req,res)=>{
+const update_data={
+
+   "id":req.body.id,
+   "name":req.body.name,
+   "link":req.body.link,
+   "Mlink":req.body.Mlink,
+}
+   console.log(update_data)
+
+   const { ObjectId } = require('mongodb'); // Import ObjectId if not already imported
+
+   const result = await collection.updateOne(
+       { _id: new ObjectId(update_data.id) },  // Correct ObjectId usage
+       { 
+           $set: {  // Use a single `$set` object
+               name: update_data.name,
+               link: update_data.link,
+               Mlink: update_data.Mlink
+           }
+       }
+   );
+   
+   res.redirect("/");
+   
+
+})
+
+
