@@ -24,6 +24,13 @@
             </div>
         </div>
     </section>
+    <section>
+        <div class="searchbar h-10 flex bg-white ">
+            <input type="search" id="searchbar" class="h-10 w-full p-2 focus:outline-none" placeholder="search here the date" onkeyup="search()">
+            <svg xmlns="http://www.w3.org/2000/svg"  class="w-5 " style=" color:black;" viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+           
+        </div>
+    </section>
     <section class="bg-yellow-200">
 
 
@@ -66,8 +73,8 @@
             <p class="text-3xl p-5">please enter the movie details to add up</p>
 
 
-            <div class="flex p-3">
-                <p class=" my-auto ">Movie name:</p><textarea    name="name" type="text" required class="bg-green-500 ml-1"></textarea>
+            <div class="flex p-3 " id="list">
+                <p class=" my-auto " >Movie name:</p><textarea    name="name" type="text" required class="bg-green-500 ml-1"></textarea>
             </div>
             <div class="flex p-3 ">
                 <p class="  my-auto ">Image Link: </p><textarea  name="Ilink" type="text" required class=" bg-green-500 ml-3"></textarea>
@@ -155,6 +162,25 @@ window.location.href= `/update?id=${Id}`
 
      }   
     }
+    const search = () => {
+    const searchbox = document.getElementById("searchbar").value.toUpperCase();
+    
+    const storeitems = document.getElementById("product-list")
+     
+     
+    for (var i = 0; i < movie_named.length; i++) {
+    let match = target[i].querySelectorAll("#movie-named")[0];
+    if (match) {
+    let textvalue = match.textcontent || match.innerHTML
+    if (textvalue. toUpperCase().indexOf(searchbox) > -1) {
+    target[i].style.display = ""; }
+     else {
+    target[i].style.display = "none";
+    }
+}
+}
+}
+document.getElementById('text').addEventListener('copy',e=>e.defaultPrevented())
 </script>
 
 </html>
