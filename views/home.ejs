@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>movies</title>
+    <link rel="stylesheet" href="./tailwind.css">
+</head>
+
+<body>
+    <section class="bg-purple-50">
+        <div class="p-5">
+            <p class="text-4xl text-center font-bold">The movies</p>
+            <div class=" hidden flex justify-center p-5 " id="show">
+                <iframe width="640" height="360" frameborder="0" id="video"
+                    src="https://mega.nz/embed/D3QHSDbb#sN_HZYgN48ePnreIxjUA1iz7xt9g65vzVb9qLSG8tSQ!1a1m"
+                    allowfullscreen allow="autoplay;"></iframe>
+            </div>
+            <div class="flex justify-center p-3 text-2xl">
+
+                <p class="mr-2 ">MOVIE NAME :</p>
+                <p id="movie-name" class="font-bold">please select a movie</p>
+            </div>
+        </div>
+    </section>
+    <section class="bg-yellow-200">
+
+
+
+   
+
+            <div class="p-10 flex gap-10 flex-wrap md:w-full">
+                <% data.forEach((row, index)=> { %>
+                    <div data-id="<%= row._id %>" id="target"
+                        class=" bg-white p-5 w-80 transform scale-100 hover:scale-105 transition duration-300 cursor-pointer "
+                        id="target">
+                        <div id="<%= index %>">
+                            <img src="<%= row.link %>" class="w-72 height" height="400px" alt="<%= row.name %>">
+                        </div>
+                        <div class="flex p-5 mr-2 custom font-semibld">
+                            <p>Movie Name :</p>
+                            <p class="ml-2 font-bold" id="movie-named">
+                                <%= row.name %>
+                            </p>
+                        </div>
+                        <button data-id="<%= row._id  %>"
+                            class="p-5 bg-red-500 text-white font-bold hover:bg-green-500 duration-100 transition-all" onclick="sendMovieData(this)">Delete</button>
+                        <p id="movie-link" class="hidden">
+                            <%= row.Mlink %>
+                        </p>
+                    </div>
+                    <% }); %>
+            </div>
+
+
+       
+    </section>
+    <form action="/" method="post">
+        <section class="p-5 bg-purple-50">
+            <p class="text-3xl p-5">please enter the movie details to add up</p>
+
+
+            <div class="flex p-3">
+                <p>name of the movie</p><input name="name" type="text" required class="bg-green-500 ml-3">
+            </div>
+            <div class="flex p-3">
+                <p>Image link </p><input name="Ilink" type="text" required class="bg-green-500 ml-20">
+            </div>
+            <div class="flex p-3">
+                <p>Movie link </p><input name="Mlink" type="text" required class="bg-green-500 ml-20">
+            </div>
+            <button type="submit "
+                class="mt-10 p-5 bg-red-500 text-white font-bold hover:bg-green-500 duration-100 transition-all rounded" >sumbit</button>
+
+            <!-- update operation alone pending and update also but first is delete operation is important  -->
+
+        </section>
+    </form>
+</body>
+<style>
+    .custom {
+        font-size: 15px;
+    }
+
+    .height {
+        height: 278px;
+    }
+</style>
+<script>
+    var movie_named = document.querySelectorAll('#movie-named')
+    var movie_name = document.getElementById('movie-name')
+    var target = document.querySelectorAll('#target')
+    var data = document.querySelectorAll('#movie-link')
+    var video = document.getElementById("video");
+    var locations = ["kindly paste location of the video", "https://mega.nz/embed/HzhgjJgK#6LEBexVd2cp9OMFRFcJU_op9CLAxq7yMNFwRTuMG8PA!1a", "https://mega.nz/embed/D3QHSDbb#sN_HZYgN48ePnreIxjUA1iz7xt9g65vzVb9qLSG8tSQ!1a1m", "https://mega.nz/embed/3iB0UCwA#BGjcHbUsfZJV3xbkp-V34nNpcd7q3ohRSGK9VjZcXks!1a", "https://mega.nz/embed/26IByBhQ#KSKQeMVPlerWpFpc5WDLKSX_oiuZso5rEO7ajotK8VE!", "https://mega.nz/embed/HyQQTKqT#wteDblL0pGdqSjRNTqd7L6CI-9rN-XVxCy_2TOuHc00", "https://mega.nz/embed/ujojEAYQ#ds8-56EHRH3X9kBz2Jpnrev1CbMiosQ8n6n3ql2pmcI"]
+    var show = document.getElementById("show")
+    let i = 0
+    var attened = false
+    target.forEach((element, index) => {
+        element.onclick = () => {
+            //  alert(index)
+            attened = true
+            if (attened == true) {
+                show.classList.remove("hidden")
+            }
+            movie_name.innerHTML = movie_named[index].innerHTML
+            video.setAttribute('src', data[index].innerHTML)
+        }
+    });
+
+
+    function sendMovieData(element) {
+        var choice=confirm("Are you sure to delete the element ")
+     if(choice==true){
+
+         const movieId = element.getAttribute('data-id'); // Extract from data- attribute
+         
+         fetch('/Delete', {
+           method: 'POST',
+           headers: { 'Content-Type': 'application/json' },
+           body: JSON.stringify({ id: movieId })
+         })
+         .then(response => response.text())
+         .then(data =>{ console.log(data)
+              window.location.reload(); });
+       }
+     }   
+
+</script>
+
+</html>
