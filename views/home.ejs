@@ -62,13 +62,13 @@
 
 
             <div class="flex p-3">
-                <p>name of the movie</p><input name="name" type="text" required class="bg-green-500 ml-3">
+                <p class=" my-auto ">Movie name:</p><textarea    name="name" type="text" required class="bg-green-500 ml-1"></textarea>
+            </div>
+            <div class="flex p-3 ">
+                <p class="  my-auto ">Image Link: </p><textarea  name="Ilink" type="text" required class=" bg-green-500 ml-3"></textarea>
             </div>
             <div class="flex p-3">
-                <p>Image link </p><input name="Ilink" type="text" required class="bg-green-500 ml-20">
-            </div>
-            <div class="flex p-3">
-                <p>Movie link </p><input name="Mlink" type="text" required class="bg-green-500 ml-20">
+                <p class="  my-auto ">Movie Link: </p><textarea name="Mlink" type="text" required class="bg-green-500 ml-3"></textarea>
             </div>
             <button type="submit "
                 class="mt-10 p-5 bg-red-500 text-white font-bold hover:bg-green-500 duration-100 transition-all rounded" >sumbit</button>
@@ -85,6 +85,11 @@
 
     .height {
         height: 278px;
+    }
+    textarea{
+        resize: both;
+        
+        
     }
 </style>
 <script>
