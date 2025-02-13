@@ -60,7 +60,7 @@ app.post('/Delete',async(req,res)=>{
 const data_del=req.body.id
 var Deleted_data=await collection.findByIdAndDelete(data_del)
 //console.log(Deleted_data)
-
+res.json({message:'data received '})
 })
 
 app.get('/update',async(req,res)=>{
