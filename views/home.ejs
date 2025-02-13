@@ -139,7 +139,9 @@
            body: JSON.stringify({ id: movieId })
          })
          .then(response => response.text())
-         .then(data =>{ console.log(data) });
+         .then(data =>{ console.log(data) 
+            window.location.reload()
+         });
        }
      }   
      function movieupdate(element) {

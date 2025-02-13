@@ -10,7 +10,8 @@ const express=require("express");
 const app=express();
 const {AsyncLocalStorage}= require('async_hooks');
 const { log } = require("console");
-
+const mongodbsantize=require('express-mongo-sanitize')
+const xssclean=require('xss-clean')
 
 
 //var Localstore= new LocalStorage('./scratch');
@@ -32,7 +33,8 @@ app.use('/',express.static("public"));
 
 app.use(express.static("public"));
 
-
+app.use(mongodbsantize())
+app.use(xssclean())
 
 app.get('/',async(req,res)=>{
   var  fulldata= await  collection.find()
