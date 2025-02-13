@@ -66,9 +66,9 @@ var Deleted_data=await collection.findByIdAndDelete(data_del)
 app.get('/update',async(req,res)=>{
    if (req.path === "/favicon.ico") return res.status(204).end();
    const id_data=req.query.id
-   console.log("id",id_data)
+  // console.log("id",id_data)
   const  singleset= await collection.findOne({ _id: req.query.id });
-  console.log('database',singleset)
+ // console.log('database',singleset)
 
 
   var singledata = [
@@ -85,7 +85,7 @@ const update_data={
    "link":req.body.link,
    "Mlink":req.body.Mlink,
 }
-   console.log(update_data)
+  // console.log(update_data)
 
    const { ObjectId } = require('mongodb'); // Import ObjectId if not already imported
 
