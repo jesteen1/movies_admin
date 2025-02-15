@@ -25,6 +25,10 @@
         type:String,
         required:true
        },
+       year:{
+        type:String,
+        require:true
+       }
   });
   const collection = new mongodb.model("movies",mongodbschema);
   module.exports=collection;

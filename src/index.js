@@ -50,7 +50,8 @@ app.post('/',async(req,res)=>{
    const data={
       name:req.body.name,
       link:req.body.Ilink,
-      Mlink:req.body.Mlink
+      Mlink:req.body.Mlink,
+      year:req.body.year
    }
    const  userdata= await collection.insertMany(data);
  //  console.log(userdata)
@@ -84,6 +85,7 @@ const update_data={
    "name":req.body.name,
    "link":req.body.link,
    "Mlink":req.body.Mlink,
+   "year":req.body.year
 }
   // console.log(update_data)
 
@@ -95,7 +97,8 @@ const update_data={
            $set: {  // Use a single `$set` object
                name: update_data.name,
                link: update_data.link,
-               Mlink: update_data.Mlink
+               Mlink: update_data.Mlink,
+               year:update_data.year,
            }
        }
    );
