@@ -1,8 +1,8 @@
   const { name } = require("ejs");
   const mongodb=require("mongoose");
   const client=require("mongodb");
-  const url2="mongodb+srv://tamilbillons:joseharrywillam123@cluster0.j5cef10.mongodb.net/movies_data?retryWrites=true&w=majority&Appname=Cluster0"
-  const connect=mongodb.connect(url2)
+  
+  const connect=mongodb.connect(process.env.mongodburl)
 
   connect.then(()=>{
       console.log("database is connected ");
